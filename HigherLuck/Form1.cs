@@ -1,4 +1,5 @@
 namespace HigherLuck
+// design update
 {
     public partial class Form1 : Form
     {
@@ -33,6 +34,11 @@ namespace HigherLuck
         }
 
         private void picDice_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
         {
 
         }

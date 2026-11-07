@@ -5,7 +5,7 @@ namespace HigherLuck
     {
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent(GetLabel11());
         }
 
         private void Form1_Load(object sender, EventArgs e)

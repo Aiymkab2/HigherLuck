@@ -58,15 +58,15 @@
             btnSetupP2 = new Button();
             btnReset = new Button();
             lblNameP1 = new GroupBox();
+            lblPointsP1 = new Label();
+            lblPointTextP1 = new Label();
             picAvatarP1 = new PictureBox();
             grpPlayer2 = new GroupBox();
+            lblPointsP2 = new Label();
+            lblPointTextP2 = new Label();
             picAvatarP2 = new PictureBox();
             label7 = new Label();
             btnStart = new Button();
-            lblPointTextP1 = new Label();
-            lblPointsP1 = new Label();
-            lblPointTextP2 = new Label();
-            lblPointsP2 = new Label();
             label8 = new Label();
             lstReport = new ListBox();
             btnShowResult = new Button();
@@ -372,6 +372,26 @@
             lblNameP1.TabStop = false;
             lblNameP1.Text = "First Player";
             // 
+            // lblPointsP1
+            // 
+            lblPointsP1.AutoSize = true;
+            lblPointsP1.Font = new Font("Segoe UI", 40F);
+            lblPointsP1.Location = new Point(193, 56);
+            lblPointsP1.Name = "lblPointsP1";
+            lblPointsP1.Size = new Size(74, 89);
+            lblPointsP1.TabIndex = 2;
+            lblPointsP1.Text = "0";
+            // 
+            // lblPointTextP1
+            // 
+            lblPointTextP1.AutoSize = true;
+            lblPointTextP1.Font = new Font("Segoe UI", 12F);
+            lblPointTextP1.Location = new Point(193, 28);
+            lblPointTextP1.Name = "lblPointTextP1";
+            lblPointTextP1.Size = new Size(57, 28);
+            lblPointTextP1.TabIndex = 1;
+            lblPointTextP1.Text = "Point";
+            // 
             // picAvatarP1
             // 
             picAvatarP1.Location = new Point(6, 33);
@@ -393,6 +413,26 @@
             grpPlayer2.TabIndex = 10;
             grpPlayer2.TabStop = false;
             grpPlayer2.Text = "Second Player";
+            // 
+            // lblPointsP2
+            // 
+            lblPointsP2.AutoSize = true;
+            lblPointsP2.Font = new Font("Segoe UI", 40F);
+            lblPointsP2.Location = new Point(193, 56);
+            lblPointsP2.Name = "lblPointsP2";
+            lblPointsP2.Size = new Size(74, 89);
+            lblPointsP2.TabIndex = 3;
+            lblPointsP2.Text = "0";
+            // 
+            // lblPointTextP2
+            // 
+            lblPointTextP2.AutoSize = true;
+            lblPointTextP2.Font = new Font("Segoe UI", 12F);
+            lblPointTextP2.Location = new Point(193, 30);
+            lblPointTextP2.Name = "lblPointTextP2";
+            lblPointTextP2.Size = new Size(57, 28);
+            lblPointTextP2.TabIndex = 3;
+            lblPointTextP2.Text = "Point";
             // 
             // picAvatarP2
             // 
@@ -423,46 +463,7 @@
             btnStart.TabIndex = 12;
             btnStart.Text = "START";
             btnStart.UseVisualStyleBackColor = true;
-            // 
-            // lblPointTextP1
-            // 
-            lblPointTextP1.AutoSize = true;
-            lblPointTextP1.Font = new Font("Segoe UI", 12F);
-            lblPointTextP1.Location = new Point(193, 28);
-            lblPointTextP1.Name = "lblPointTextP1";
-            lblPointTextP1.Size = new Size(57, 28);
-            lblPointTextP1.TabIndex = 1;
-            lblPointTextP1.Text = "Point";
-            // 
-            // lblPointsP1
-            // 
-            lblPointsP1.AutoSize = true;
-            lblPointsP1.Font = new Font("Segoe UI", 40F);
-            lblPointsP1.Location = new Point(193, 56);
-            lblPointsP1.Name = "lblPointsP1";
-            lblPointsP1.Size = new Size(74, 89);
-            lblPointsP1.TabIndex = 2;
-            lblPointsP1.Text = "0";
-            // 
-            // lblPointTextP2
-            // 
-            lblPointTextP2.AutoSize = true;
-            lblPointTextP2.Font = new Font("Segoe UI", 12F);
-            lblPointTextP2.Location = new Point(193, 30);
-            lblPointTextP2.Name = "lblPointTextP2";
-            lblPointTextP2.Size = new Size(57, 28);
-            lblPointTextP2.TabIndex = 3;
-            lblPointTextP2.Text = "Point";
-            // 
-            // lblPointsP2
-            // 
-            lblPointsP2.AutoSize = true;
-            lblPointsP2.Font = new Font("Segoe UI", 40F);
-            lblPointsP2.Location = new Point(193, 56);
-            lblPointsP2.Name = "lblPointsP2";
-            lblPointsP2.Size = new Size(74, 89);
-            lblPointsP2.TabIndex = 3;
-            lblPointsP2.Text = "0";
+            btnStart.Click += btnStart_Click;
             // 
             // label8
             // 

@@ -14,12 +14,11 @@ namespace HigherLuck
         private readonly Random random = new Random();
 
         private readonly string resultFile =
-            Path.Combine(
-                Environment.GetFolderPath(
-                    Environment.SpecialFolder.LocalApplicationData),
-                "HigherLuck",
-                "HigherLuckResults.txt");
-
+                Path.GetFullPath(
+                Path.Combine(
+                AppContext.BaseDirectory,
+                @"..\..\..",
+               "HigherLuckResults.txt"));
 
         private int totalRounds;
         private int currentRound;
@@ -103,6 +102,15 @@ namespace HigherLuck
             }
 
             player1 = new Player(textBox2.Text.Trim(), avatar);
+            if (avatar == 1) rbAvatar1.Enabled = false;
+            if (avatar == 2) rbAvatar2.Enabled = false;
+            if (avatar == 3) rbAvatar3.Enabled = false;
+            if (avatar == 4) rbAvatar4.Enabled = false;
+
+            rbAvatar1.Checked = false;
+            rbAvatar2.Checked = false;
+            rbAvatar3.Checked = false;
+            rbAvatar4.Checked = false;
 
             lblNameP1.Text = player1.Name;
             picAvatarP1.Image = AvatarImage(avatar);
@@ -247,50 +255,30 @@ namespace HigherLuck
 
         private void ShowDice(int value)
         {
-            Bitmap bitmap = new Bitmap(120, 120);
-
-            using (Graphics g = Graphics.FromImage(bitmap))
+            if (value == 1)
             {
-                g.Clear(Color.White);
-
-                using (Pen pen = new Pen(Color.Black, 3))
-                using (Brush brush = new SolidBrush(Color.Black))
-                {
-                    g.DrawRectangle(pen, 2, 2, 115, 115);
-
-                    void Dot(int x, int y)
-                    {
-                        g.FillEllipse(brush, x - 9, y - 9, 18, 18);
-                    }
-
-                    if (value == 1 || value == 3 || value == 5)
-                        Dot(60, 60);
-
-                    if (value >= 2)
-                    {
-                        Dot(30, 30);
-                        Dot(90, 90);
-                    }
-
-                    if (value >= 4)
-                    {
-                        Dot(90, 30);
-                        Dot(30, 90);
-                    }
-
-                    if (value == 6)
-                    {
-                        Dot(30, 60);
-                        Dot(90, 60);
-                    }
-                }
+                picDice.Image = Image.FromFile("image/dice1.jpg");
             }
-
-            Image? oldImage = picDice.Image;
-            picDice.Image = bitmap;
-
-            if (oldImage is Bitmap)
-                oldImage.Dispose();
+            else if (value == 2)
+            {
+                picDice.Image = Image.FromFile("image/dice2.jpg");
+            }
+            else if (value == 3)
+            {
+                picDice.Image = Image.FromFile("image/dice3.jpg");
+            }
+            else if (value == 4)
+            {
+                picDice.Image = Image.FromFile("image/dice4.jpg");
+            }
+            else if (value == 5)
+            {
+                picDice.Image = Image.FromFile("image/dice5.jpg");
+            }
+            else if (value == 6)
+            {
+                picDice.Image = Image.FromFile("image/dice6.jpg");
+            }
         }
 
         private void FinishGame()
@@ -318,16 +306,30 @@ namespace HigherLuck
 
             lblTurn.Text = $"Winner: {winner}";
 
+
             try
             {
                 Directory.CreateDirectory(
                     Path.GetDirectoryName(resultFile)!);
 
-                File.AppendAllText(
+                FileStream fs = new FileStream(
                     resultFile,
-                    result + Environment.NewLine);
+                    FileMode.Append,
+                    FileAccess.Write);
 
+                StreamWriter sw = new StreamWriter(fs);
+
+                sw.WriteLine(result);
+
+                sw.Close();
+                fs.Close();
+                MessageBox.Show(
+                         "The game result has been saved successfully!",
+                         "Saved Successfully",
+                         MessageBoxButtons.OK,
+                         MessageBoxIcon.Information);
                 btnShowResult.Enabled = true;
+
             }
             catch (Exception ex)
             {
@@ -335,12 +337,14 @@ namespace HigherLuck
                     "Error saving result: " + ex.Message);
             }
 
+
             MessageBox.Show(
                 winner == "DRAW"
                     ? "The game ended in a draw!"
                     : $"The winner is {winner}!",
                 "Game Finished");
         }
+
 
         private void ShowResults(object? sender, EventArgs e)
         {
@@ -354,19 +358,28 @@ namespace HigherLuck
                     return;
                 }
 
-                string[] lines = File.ReadAllLines(resultFile);
+                FileStream fs = new FileStream(
+                    resultFile,
+                    FileMode.Open,
+                    FileAccess.Read);
 
-                foreach (string line in lines)
+                StreamReader sr = new StreamReader(fs);
+
+                while (!sr.EndOfStream)
                 {
+                    string line = sr.ReadLine() ?? "";
                     lstReport.Items.Add(line);
                 }
+
+                sr.Close();
+                fs.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "Error reading results: " + ex.Message);
+                MessageBox.Show("Error reading results: " + ex.Message);
             }
         }
+
 
         private void ResetGame(object? sender, EventArgs e)
         {
@@ -394,6 +407,11 @@ namespace HigherLuck
             numericUpDown1.Value = 5;
 
             groupBox3.Enabled = true;
+
+            rbAvatar1.Enabled = true;
+            rbAvatar2.Enabled = true;
+            rbAvatar3.Enabled = true;
+            rbAvatar4.Enabled = true;
 
             rbAvatar1.Checked = false;
             rbAvatar2.Checked = false;

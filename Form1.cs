@@ -255,50 +255,30 @@ namespace HigherLuck
 
         private void ShowDice(int value)
         {
-            Bitmap bitmap = new Bitmap(120, 120);
-
-            using (Graphics g = Graphics.FromImage(bitmap))
+            if (value == 1)
             {
-                g.Clear(Color.White);
-
-                using (Pen pen = new Pen(Color.Black, 3))
-                using (Brush brush = new SolidBrush(Color.Black))
-                {
-                    g.DrawRectangle(pen, 2, 2, 115, 115);
-
-                    void Dot(int x, int y)
-                    {
-                        g.FillEllipse(brush, x - 9, y - 9, 18, 18);
-                    }
-
-                    if (value == 1 || value == 3 || value == 5)
-                        Dot(60, 60);
-
-                    if (value >= 2)
-                    {
-                        Dot(30, 30);
-                        Dot(90, 90);
-                    }
-
-                    if (value >= 4)
-                    {
-                        Dot(90, 30);
-                        Dot(30, 90);
-                    }
-
-                    if (value == 6)
-                    {
-                        Dot(30, 60);
-                        Dot(90, 60);
-                    }
-                }
+                picDice.Image = Image.FromFile("image/dice1.jpg");
             }
-
-            Image? oldImage = picDice.Image;
-            picDice.Image = bitmap;
-
-            if (oldImage is Bitmap)
-                oldImage.Dispose();
+            else if (value == 2)
+            {
+                picDice.Image = Image.FromFile("image/dice2.jpg");
+            }
+            else if (value == 3)
+            {
+                picDice.Image = Image.FromFile("image/dice3.jpg");
+            }
+            else if (value == 4)
+            {
+                picDice.Image = Image.FromFile("image/dice4.jpg");
+            }
+            else if (value == 5)
+            {
+                picDice.Image = Image.FromFile("image/dice5.jpg");
+            }
+            else if (value == 6)
+            {
+                picDice.Image = Image.FromFile("image/dice6.jpg");
+            }
         }
 
         private void FinishGame()
